@@ -4,6 +4,6 @@ set t_Co=256
 colorscheme apprentice
 
 "setting textwidth to 80
-set textwidth=120
+set textwidth=100
 highlight ColorColumn ctermbg=0
-set colorcolumn=120
+set colorcolumn=100

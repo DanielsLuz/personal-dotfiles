@@ -14,7 +14,7 @@ noremap <Right> <nop>
 set tags=./tags;
 set noswapfile
 " Use ack instead of grep
-set grepprg=ack
+set grepprg=ag\ --path-to-agignore\ ~/.ignore\ --nogroup\ --nocolor
 " Wildignores for ctrlP
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,.cabal-sandbox,.tmp
 set wildmode=longest:full,full
@@ -36,6 +36,7 @@ set notimeout
 set ttimeout
 set ttimeoutlen=10
 " set the runtime path to include Vundle and initialize
+set rtp+=~/.fzf
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
@@ -55,7 +56,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 " Navigation
 Plugin 'scrooloose/nerdtree'
-Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'junegunn/fzf.vim'
 " Better buffers
 Plugin 'itchyny/lightline.vim'
 Plugin 'taohex/lightline-buffer'
@@ -65,6 +66,7 @@ Plugin 'thoughtbot/vim-rspec'
 Plugin 'slim-template/vim-slim'
 " Autocompletion
 Plugin 'Shougo/deoplete.nvim'
+" Plugin 'carlitux/deoplete-ternjs'
 Plugin 'garbas/vim-snipmate'
 Plugin 'mattn/emmet-vim'
 Plugin 'jiangmiao/auto-pairs'
@@ -73,13 +75,11 @@ Plugin 'tomtom/tcomment_vim'
 Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'posva/vim-vue'
 Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
-Plugin 'burnettk/vim-angular'
-Plugin 'leafgarland/typescript-vim'
-"Other languages
-Plugin 'elixir-editors/vim-elixir'
 call vundle#end()            " required
 filetype plugin indent on    " required
 let g:neomake_javascript_eslint_exe = $PWD .'/node_modules/.bin/eslint'
-" Enable deoplete at startup
+let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_vue_eslint_exe = $PWD .'/node_modules/.bin/eslint'
 let g:deoplete#enable_at_startup = 1
+autocmd FileType vue syntax sync fromstart
+autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript

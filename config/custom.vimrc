@@ -1,13 +1,20 @@
 "remap save shortcut
-nnoremap <leader>ww :w<CR>
-nnoremap <leader>wa :wa<CR>
+nnoremap <leader>w :w<CR>
+nnoremap <leader>q :wa<CR>
 "remap exit insert mode
 ino jj <esc>
 cno jj <c-c>
+tnoremap jj <C-\><C-n>
+tnoremap <C-k> <UP>
+tnoremap <C-j> <DOWN>
 "Useful mappings
 ""go to next and previous buffer
 nnoremap <C-l> :bn<CR>
 nnoremap <C-h> :bp<CR>
+" Maps backspace to last buffer
+nmap <BS> <C-^>
+" Remaping K for search under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 " QuickFix navigation
 nnoremap ]q :cnext<CR>
 nnoremap [q :cprevious<CR>
