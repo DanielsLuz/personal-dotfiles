@@ -83,3 +83,6 @@ let g:neomake_vue_eslint_exe = $PWD .'/node_modules/.bin/eslint'
 let g:deoplete#enable_at_startup = 1
 autocmd FileType vue syntax sync fromstart
 autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript
+
+set path=.,src
+set suffixesadd=.js,.vue
