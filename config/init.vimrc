@@ -10,6 +10,7 @@ noremap <Up> <nop>
 noremap <Down> <nop>
 noremap <Left> <nop>
 noremap <Right> <nop>
+nnoremap <Leader>zz :let &scrolloff=999-&scrolloff<CR>
 "enabling the ctags
 set tags=./tags;
 set noswapfile

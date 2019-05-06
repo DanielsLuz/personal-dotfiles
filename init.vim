@@ -15,7 +15,7 @@ noremap <Right> <nop>
 set tags=./tags;
 set noswapfile
 " Use ack instead of grep
-set grepprg=ag\ --path-to-agignore\ ~/.ignore\ --nogroup\ --nocolor
+set grepprg=ag\ --path-to-ignore\ ~/.ignore\ --nogroup\ --nocolor
 " Wildignores for ctrlP
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,.cabal-sandbox,.tmp
 set wildmode=longest:full,full
@@ -24,12 +24,10 @@ set path=.,src
 set suffixesadd=.js,.vue
 
 """""""""""""""""""
-set nocompatible              " be iMproved, required
-filetype off                  " required
+set nocompatible
+filetype off
 filetype plugin indent on
-set showmatch		" Show matching brackets.
-" set tabstop=4
-" set shiftwidth=4
+set showmatch
 "set tab to 2 spaces rather than 4
 set tabstop=2
 set shiftwidth=2
@@ -55,40 +53,36 @@ Plugin 'neomake/neomake'
 " Searching
 Plugin 'mileszs/ack.vim'
 " Some colorschemes
-Plugin 'rafi/awesome-vim-colorschemes'
+" Plugin 'rafi/awesome-vim-colorschemes'
+Plugin 'drewtempelmeyer/palenight.vim'
 " Git utils
 Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-fugitive'
 " Navigation
 Plugin 'scrooloose/nerdtree'
 Plugin 'junegunn/fzf.vim'
 " Better buffers
 Plugin 'itchyny/lightline.vim'
-Plugin 'taohex/lightline-buffer'
+Plugin 'taohexxx/lightline-buffer'
 " Autocompletion
 Plugin 'Shougo/deoplete.nvim'
 Plugin 'mattn/emmet-vim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'tomtom/tcomment_vim'
 "Javascript plugins
-Plugin 'othree/javascript-libraries-syntax.vim'
-Plugin 'posva/vim-vue'
-Plugin 'pangloss/vim-javascript'
+" Plugin 'othree/javascript-libraries-syntax.vim'
+" Plugin 'posva/vim-vue'
+" Plugin 'pangloss/vim-javascript'
+Plugin 'Valloric/MatchTagAlways'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
 "APPEARANCE SETTINGS
-"Setting colorscheme
 set background=dark
-" set t_Co=256
-colorscheme scheakur
+colorscheme palenight
+let g:palenight_terminal_italics=1
 
-"setting textwidth to 80
-set textwidth=100
-highlight ColorColumn ctermbg=lightblue
-set colorcolumn=100
 "CUSTOM MAPPINGS
-"
-"remap save shortcut
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :wa<CR>
 
@@ -103,6 +97,8 @@ tnoremap <C-j> <DOWN>
 ""go to next and previous buffer
 nnoremap <C-l> :bn<CR>
 nnoremap <C-h> :bp<CR>
+noremap <F12> <Esc>:syntax sync fromstart<CR>
+inoremap <F12> <C-o>:syntax sync fromstart<CR>
 
 " Maps backspace to last buffer
 nmap <BS> <C-^>
@@ -114,6 +110,7 @@ nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 nnoremap ]q :cnext<CR>
 nnoremap [q :cprevious<CR>
 
+nnoremap <leader>% :MtaJumpToOtherTag<cr>
 " Close the current buffer and move to the previous one
 " This replicates the idea of closing a tab
 nmap <leader>bq :bp <BAR> bd #<CR>
@@ -171,8 +168,8 @@ let g:neomake_javascript_eslint_exe = $PWD .'/node_modules/.bin/eslint'
 let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_vue_eslint_exe = $PWD .'/node_modules/.bin/eslint'
 let g:deoplete#enable_at_startup = 1
-autocmd FileType vue syntax sync fromstart
-autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
+" autocmd FileType vue syntax sync fromstart
+" autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 
 "deoplete
 
@@ -230,10 +227,10 @@ let g:lightline = {
       \   'separator': '',
       \ },
       \ }
-
-"omnicomplete configuration
-set omnifunc=csscomplete#CompleteCSS
-autocmd BufNewFile,BufRead *.scss             set ft=scss.css
+let g:lightline.colorscheme = 'palenight'
+" "omnicomplete configuration
+" set omnifunc=csscomplete#CompleteCSS
+" autocmd BufNewFile,BufRead *.scss             set ft=scss.css
 autocmd! BufWritePost * Neomake
 
 "nerdtree configuration
@@ -254,7 +251,31 @@ function! AdjustWindowHeight(minheight, maxheight)
   exe max([min([line("$"), a:maxheight]), a:minheight]) . "wincmd _"
 endfunction
 
+
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu | set rnu   | endif
+  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu | set nornu | endif
+augroup END
+
+augroup vue_ft
+  au!
+  autocmd BufNewFile,BufRead *.vue   set filetype=html
+augroup END
+
 "Neovim configs
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 0
 set clipboard+=unnamedplus
 let g:syntastic_ignore_files = ['\.java$']
+
+if (has("nvim"))
+  "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+endif
+
+"For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+"Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+" < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+if (has("termguicolors"))
+  set termguicolors
+endif
