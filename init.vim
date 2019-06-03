@@ -38,6 +38,8 @@ set number
 set notimeout
 set ttimeout
 set ttimeoutlen=10
+set splitbelow
+set splitright
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.fzf
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -71,8 +73,8 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'tomtom/tcomment_vim'
 "Javascript plugins
 " Plugin 'othree/javascript-libraries-syntax.vim'
-" Plugin 'posva/vim-vue'
-" Plugin 'pangloss/vim-javascript'
+Plugin 'posva/vim-vue'
+Plugin 'pangloss/vim-javascript'
 Plugin 'Valloric/MatchTagAlways'
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -85,6 +87,7 @@ let g:palenight_terminal_italics=1
 "CUSTOM MAPPINGS
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :wa<CR>
+nnoremap <space> /
 
 "remap exit insert mode
 ino jj <esc>
@@ -161,7 +164,7 @@ nnoremap J mzJ`z
 " Source (reload configuration)
 nnoremap <silent> <F5> :source $MYVIMRC<CR>
 " Toggle search highlight
-nnoremap <silent> <F6> :set nohlsearch!<CR> :set nohlsearch?<CR>
+nnoremap <CR> :noh<CR>
 
 "PLUGIN SETTINGS
 let g:neomake_javascript_eslint_exe = $PWD .'/node_modules/.bin/eslint'
@@ -260,7 +263,7 @@ augroup END
 
 augroup vue_ft
   au!
-  autocmd BufNewFile,BufRead *.vue   set filetype=html
+  autocmd BufNewFile,BufRead *.vue   set filetype=vue
 augroup END
 
 "Neovim configs
@@ -279,3 +282,15 @@ endif
 if (has("termguicolors"))
   set termguicolors
 endif
+
+function! MyFoldText()
+    let nblines = v:foldend - v:foldstart + 1
+    let w = winwidth(0) - &foldcolumn - (&number ? 8 : 0)
+    let line = getline(v:foldstart)
+    let comment = substitute(line, '/\*\|\*/\|{{{\d\=', '', 'g')
+    let expansionString = repeat(".", w - strwidth(nblines.comment.'"'))
+    let txt = '"' . comment . expansionString . nblines
+    return txt
+endfunction
+set foldtext=MyFoldText()
+hi FOLDED guifg=white
