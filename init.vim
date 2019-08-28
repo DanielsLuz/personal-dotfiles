@@ -52,6 +52,7 @@ Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 " Linting
 Plugin 'neomake/neomake'
+Plugin 'dense-analysis/ale'
 " Searching
 Plugin 'mileszs/ack.vim'
 " Some colorschemes
@@ -71,11 +72,15 @@ Plugin 'Shougo/deoplete.nvim'
 Plugin 'mattn/emmet-vim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'tomtom/tcomment_vim'
+Plugin 'tpope/vim-surround'
 "Javascript plugins
 " Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'posva/vim-vue'
 Plugin 'pangloss/vim-javascript'
 Plugin 'Valloric/MatchTagAlways'
+"Rails plugins
+Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-bundler'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -123,9 +128,6 @@ map <leader>bo :BufOnly<CR>
 
 "Remove all trailing whitespace by pressing F3
 nnoremap <F3> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
-
-"set line numbers on
-nmap <C-N><C-N> :set invnumber<CR>
 
 "map \s to rename variable
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
@@ -194,9 +196,6 @@ function! s:check_back_space() abort "{{{
 endfunction"}}}
 
 " inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-" <C-h>, <BS>: close popup and delete backword char
-inoremap <expr><C-h> deolete#mappings#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
 
 "lightline
 
@@ -234,7 +233,16 @@ let g:lightline.colorscheme = 'palenight'
 " "omnicomplete configuration
 " set omnifunc=csscomplete#CompleteCSS
 " autocmd BufNewFile,BufRead *.scss             set ft=scss.css
-autocmd! BufWritePost * Neomake
+" autocmd! BufWritePost * Neomake
+
+" Enables only Flow for JavaScript. See :ALEInfo for a list of other available
+" linters. NOTE: the `flow` linter uses an old API; prefer `flow-language-server`.
+let b:ale_linters = ['flow-language-server']
+
+" Or in ~/.vim/vimrc:
+let g:ale_linters = {
+\   'javascript': ['flow-language-server'],
+\}
 
 "nerdtree configuration
 "Toggle NERDTree
@@ -243,8 +251,22 @@ let g:NERDTreeWinSize=45
 "fzf configuration
 nnoremap <silent> <leader><space> :Files<CR>
 nnoremap <silent> <leader>a :Buffers<CR>
-let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+nnoremap <silent> <leader>. :FZF -e<CR>
+" let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+let $FZF_DEFAULT_COMMAND = 'ag --ignore spec/fixtures/vcr_cassettes -g ""'
+let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
 
+function! s:build_quickfix_list(lines)
+  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+  copen
+  cc
+endfunction
+
+let g:fzf_action = {
+  \ 'ctrl-q': function('s:build_quickfix_list'),
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
 "emmet plugin, html and css
 let g:user_emmet_leader_key='<C-X>'
 
@@ -294,3 +316,9 @@ function! MyFoldText()
 endfunction
 set foldtext=MyFoldText()
 hi FOLDED guifg=white
+
+nnoremap <silent> <C-C><C-K> :call OpenCSSRuleDocs()<CR>
+function! OpenCSSRuleDocs()
+  let CSSDocsURL = 'https://developer.mozilla.org/en-US/docs/Web/CSS'
+  silent exec "!x-www-browser " . CSSDocsURL . "/" . expand("<cword>")
+endfunction
