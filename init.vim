@@ -51,7 +51,7 @@ Plugin 'tpope/vim-dispatch'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 " Linting
-Plugin 'neomake/neomake'
+" Plugin 'neomake/neomake'
 Plugin 'dense-analysis/ale'
 " Searching
 Plugin 'mileszs/ack.vim'
@@ -198,7 +198,6 @@ endfunction"}}}
 " inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 "lightline
-
 " This allows buffers to be hidden if you've modified a buffer.
 " This is almost a must if you wish to use buffers in this way.
 set hidden
@@ -230,18 +229,12 @@ let g:lightline = {
       \ },
       \ }
 let g:lightline.colorscheme = 'palenight'
-" "omnicomplete configuration
-" set omnifunc=csscomplete#CompleteCSS
-" autocmd BufNewFile,BufRead *.scss             set ft=scss.css
-" autocmd! BufWritePost * Neomake
-
-" Enables only Flow for JavaScript. See :ALEInfo for a list of other available
-" linters. NOTE: the `flow` linter uses an old API; prefer `flow-language-server`.
-let b:ale_linters = ['flow-language-server']
 
 " Or in ~/.vim/vimrc:
+" Run both javascript and vue linters for vue files.
+let b:ale_linter_aliases = ['javascript', 'vue']
 let g:ale_linters = {
-\   'javascript': ['flow-language-server'],
+\   'javascript': ['eslint', 'flow-language-server'],
 \}
 
 "nerdtree configuration
@@ -252,8 +245,7 @@ let g:NERDTreeWinSize=45
 nnoremap <silent> <leader><space> :Files<CR>
 nnoremap <silent> <leader>a :Buffers<CR>
 nnoremap <silent> <leader>. :FZF -e<CR>
-" let $FZF_DEFAULT_COMMAND = 'ag -g ""'
-let $FZF_DEFAULT_COMMAND = 'ag --ignore spec/fixtures/vcr_cassettes -g ""'
+let $FZF_DEFAULT_COMMAND = 'ag --hidden -g ""'
 let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
 
 function! s:build_quickfix_list(lines)
@@ -270,18 +262,15 @@ let g:fzf_action = {
 "emmet plugin, html and css
 let g:user_emmet_leader_key='<C-X>'
 
+"vim-rails
+nnoremap <leader>rf :.Rails<CR>
+nnoremap <leader>rs :Rails<CR>
+
 "quickfix settings
 au FileType qf call AdjustWindowHeight(3, 10)
 function! AdjustWindowHeight(minheight, maxheight)
   exe max([min([line("$"), a:maxheight]), a:minheight]) . "wincmd _"
 endfunction
-
-
-augroup numbertoggle
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu | set rnu   | endif
-  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu | set nornu | endif
-augroup END
 
 augroup vue_ft
   au!
@@ -311,7 +300,7 @@ function! MyFoldText()
     let line = getline(v:foldstart)
     let comment = substitute(line, '/\*\|\*/\|{{{\d\=', '', 'g')
     let expansionString = repeat(".", w - strwidth(nblines.comment.'"'))
-    let txt = '"' . comment . expansionString . nblines
+    let txt = comment . expansionString . nblines
     return txt
 endfunction
 set foldtext=MyFoldText()
