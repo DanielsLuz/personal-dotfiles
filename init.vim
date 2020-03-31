@@ -64,11 +64,14 @@ Plugin 'tpope/vim-fugitive'
 " Navigation
 Plugin 'scrooloose/nerdtree'
 Plugin 'junegunn/fzf.vim'
+Plugin 'ludovicchabant/vim-gutentags'
 " Better buffers
 Plugin 'itchyny/lightline.vim'
 Plugin 'taohexxx/lightline-buffer'
 " Autocompletion
 Plugin 'Shougo/deoplete.nvim'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 Plugin 'mattn/emmet-vim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'tomtom/tcomment_vim'
@@ -88,7 +91,8 @@ filetype plugin indent on    " required
 set background=dark
 colorscheme palenight
 let g:palenight_terminal_italics=1
-
+noremap <F7> :highlight Normal guibg=none<CR>
+noremap <F8> :highlight Normal guibg=#292D3E<CR>
 "CUSTOM MAPPINGS
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :wa<CR>
@@ -185,15 +189,11 @@ let g:deoplete#enable_smart_case=1
 let g:deoplete#sources = {}
 let g:deoplete#sources._ = ['buffer', 'tags']
 let deoplete#tag#cache_limit_size = 5000000
-" deoplete tab-complete
-imap <silent><expr> <TAB>
-  \ pumvisible() ? "\<C-n>" :
-  \ <SID>check_back_space() ? "\<TAB>" :
-  \ deoplete#mappings#manual_complete()
-function! s:check_back_space() abort "{{{
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction"}}}
+
+" snippet completion
+inoremap <c-x><c-k> <c-x><c-k>
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
