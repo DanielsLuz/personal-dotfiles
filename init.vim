@@ -176,10 +176,12 @@ nnoremap <CR> :noh<CR>
 let g:neomake_javascript_eslint_exe = $PWD .'/node_modules/.bin/eslint'
 let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_vue_eslint_exe = $PWD .'/node_modules/.bin/eslint'
-let g:deoplete#enable_at_startup = 1
+" let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_yarp = 1
 " autocmd FileType vue syntax sync fromstart
 " autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
-
+let g:python_host_prog = '/home/danielluz/.pyenv/versions/neovim2.7/bin/python'
+let g:python3_host_prog = '/home/danielluz/.pyenv/versions/neovim3.7.2/bin/python'
 "deoplete
 
 " deoplete configuration
