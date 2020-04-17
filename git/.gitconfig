@@ -1,0 +1,30 @@
+[core]
+	pager = diff-so-fancy | less --tabs=4 -RFX
+	excludesfile = /home/danielluiz/.gitignore_global
+[user]
+	email = danielluz1995@gmail.com
+	name = Daniel Luz
+[pull]
+	rebase = true
+[push]
+	default = current
+[alias]
+  last = log -1
+[color]
+	ui = true
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	meta = yellow
+	frag = magenta bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[diff-so-fancy]
+	first-run = false
+[rebase]
+	autosquash = true
