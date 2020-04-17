@@ -42,7 +42,7 @@ set splitbelow
 set splitright
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.fzf
-set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=~/.config/nvim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 " Global utils
