@@ -1,0 +1,39 @@
+[global_config]
+  borderless = True
+  title_transmit_bg_color = "#3465a4"
+[keybindings]
+  go_down = <Alt>j
+  go_left = <Alt>h
+  go_right = <Alt>l
+  go_up = <Alt>k
+  layout_launcher = None
+  move_tab_left = <Primary><Shift>Page_Up
+  move_tab_right = <Primary><Shift>Page_Down
+  next_tab = <Alt>n
+  prev_tab = <Alt>b
+[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      profile = default
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      type = Window
+[plugins]
+[profiles]
+  [[default]]
+    background_darkness = 0.8
+    cursor_color = "#aaaaaa"
+    font = Fira Code Medium 14
+    scrollback_infinite = True
+    show_titlebar = False
+    use_system_font = False
+  [[transparent]]
+    background_darkness = 0.8
+    background_type = transparent
+    cursor_color = "#aaaaaa"
+    font = Fira Code Medium 14
+    scrollback_infinite = True
+    show_titlebar = False
+    use_system_font = False

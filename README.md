@@ -21,3 +21,5 @@ Clone anywhere.
 - `ln -s $PWD/shell/.zshrc $HOME/.zshrc`
 - `ln -s $PWD/shell/.oh-my-zsh $HOME/.oh-my-zsh`
 - `ln -s $PWD/shell/.agignore $HOME/.agignore`
+- install Terminator terminal
+  - `ln -s $PWD/shell/terminator $HOME/.config/terminator`
