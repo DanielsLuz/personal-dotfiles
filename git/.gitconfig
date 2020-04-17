@@ -1,6 +1,6 @@
 [core]
 	pager = diff-so-fancy | less --tabs=4 -RFX
-	excludesfile = /home/danielluiz/.gitignore_global
+	excludesfile = $HOME/.gitignore_global
 [user]
 	email = danielluz1995@gmail.com
 	name = Daniel Luz
