@@ -153,6 +153,7 @@ vnoremap L g_
 nnoremap c "xc
 xnoremap c "xc
 
+nnoremap <leader>y :let @+=expand("%") . ':' . line(".")<CR>
 " After block yank and paste, move cursor to the end of operated text and don't override register
 vnoremap y y`]
 vnoremap p "_dP`]
@@ -239,7 +240,7 @@ let g:ale_linters = {
 
 "nerdtree configuration
 "Toggle NERDTree
-let g:NERDTreeWinSize=45
+let g:NERDTreeWinSize=30
 
 "fzf configuration
 nnoremap <silent> <leader><space> :Files<CR>
