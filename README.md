@@ -15,7 +15,7 @@ Clone anywhere.
 - `ln -s $PWD/git/.gitconfig $HOME/.gitconfig`
   - edit "user" section accordingly
 - `ln -s $PWD/git/.gitignore_global $HOME/.gitignore_global`
-  - make sure `git config core.excludesfile $HOME/.gitignore_global` is set correctly
+  - make sure `git config --global core.excludesfile $HOME/.gitignore_global` is set correctly
 
 ### ZSH
 - `ln -s $PWD/shell/.zshrc $HOME/.zshrc`
