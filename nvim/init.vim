@@ -305,6 +305,8 @@ function! MyFoldText()
     return txt
 endfunction
 set foldtext=MyFoldText()
+set foldmethod=syntax
+set foldlevel=3
 hi FOLDED guifg=white
 
 nnoremap <silent> <C-C><C-K> :call OpenCSSRuleDocs()<CR>
