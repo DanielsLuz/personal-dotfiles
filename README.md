@@ -4,8 +4,11 @@ Clone anywhere.
 
 ## Configuring
 ### Neovim
-- install Neovim
-- `ln -s $PWD/nvim $HOME/.config/nvim`
+- install (Neovim)[https://neovim.io/]
+- install (Vundle)[https://github.com/VundleVim/Vundle.vim.git]
+  - `git clone https://github.com/VundleVim/Vundle.vim.git ~/.config/nvim/bundle/Vundle.vim`
+- symlink `nvim` folder to your config directory
+  - `ln -s $PWD/nvim $HOME/.config/nvim`
 - open `nvim` and run `:BundleInstall`, then `:UpdateRemotePlugins`
 
 ### Git
