@@ -40,6 +40,9 @@ set ttimeout
 set ttimeoutlen=10
 set splitbelow
 set splitright
+
+let g:python3_host_prog='/usr/local/bin/python3.8'
+let g:python2_host_prog='/usr/bin/python'
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.fzf
 set rtp+=~/.config/nvim/bundle/Vundle.vim
@@ -83,7 +86,6 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'Valloric/MatchTagAlways'
 "Rails plugins
 Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-bundler'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -184,12 +186,13 @@ let g:deoplete#enable_at_startup = 1
 "deoplete
 
 " deoplete configuration
-let g:deoplete#enable_refresh_always=0
-let g:deoplete#enable_smart_case=1
-
-let g:deoplete#sources = {}
-let g:deoplete#sources._ = ['buffer', 'tags']
-let deoplete#tag#cache_limit_size = 5000000
+call deoplete#custom#option({
+\ 'enable_smart_case': 1,
+\ 'enable_refresh_always': 0,
+\ 'auto_complete_delay': 200,
+\ 'sources._': ['buffer', 'tags'],
+\ 'cache_limit_size': 5000000
+\ })
 
 " snippet completion
 inoremap <c-x><c-k> <c-x><c-k>
@@ -262,10 +265,6 @@ let g:fzf_action = {
   \ 'ctrl-v': 'vsplit' }
 "emmet plugin, html and css
 let g:user_emmet_leader_key='<C-X>'
-
-"vim-rails
-nnoremap <leader>rf :.Rails<CR>
-nnoremap <leader>rs :Rails<CR>
 
 "quickfix settings
 au FileType qf call AdjustWindowHeight(3, 10)
