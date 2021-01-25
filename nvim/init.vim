@@ -3,6 +3,8 @@
 let $MYVIMCFG = '$HOME/.config/nvim/config'
 "Incremental search, jump as I type
 set incsearch
+set list
+set autoread
 syntax enable
 "remap LEADER
 let mapleader=","
@@ -249,7 +251,7 @@ let g:NERDTreeWinSize=30
 nnoremap <silent> <leader><space> :Files<CR>
 nnoremap <silent> <leader>a :Buffers<CR>
 nnoremap <silent> <leader>. :FZF -e<CR>
-let $FZF_DEFAULT_COMMAND = 'ag --hidden -g ""'
+let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
 let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
 
 function! s:build_quickfix_list(lines)
