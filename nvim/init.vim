@@ -170,8 +170,8 @@ xnoremap > >gv
 nnoremap gp `[v`]
 " Keep the cursor in place while joining lines
 nnoremap J mzJ`z
-" [S]plit line (sister to [J]oin lines) S is covered by cc.
-" nnoremap S mzi<CR><ESC>`z
+" alternative tag jump
+nnoremap tj :tjump<CR>
 " Source (reload configuration)
 nnoremap <silent> <F5> :source $MYVIMRC<CR>
 " Toggle search highlight
@@ -241,6 +241,9 @@ let g:lightline.colorscheme = 'palenight'
 let b:ale_linter_aliases = ['javascript', 'vue']
 let g:ale_linters = {
 \   'javascript': ['eslint', 'flow-language-server'],
+\}
+let g:ale_fixers = {
+\   'javascript': ['eslint'],
 \}
 
 "nerdtree configuration
