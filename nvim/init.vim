@@ -43,7 +43,7 @@ set ttimeoutlen=10
 set splitbelow
 set splitright
 
-let g:python3_host_prog='/usr/local/bin/python3.8'
+let g:python3_host_prog='/usr/bin/python3'
 let g:python2_host_prog='/usr/bin/python'
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.fzf
@@ -55,14 +55,16 @@ Plugin 'radenling/vim-dispatch-neovim'
 Plugin 'tpope/vim-dispatch'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
+Plugin 'tpope/vim-obsession'
+Plugin 'tpope/vim-repeat'
 " Linting
 " Plugin 'neomake/neomake'
 Plugin 'dense-analysis/ale'
 " Searching
 Plugin 'mileszs/ack.vim'
 " Some colorschemes
-" Plugin 'rafi/awesome-vim-colorschemes'
-Plugin 'drewtempelmeyer/palenight.vim'
+Plugin 'arcticicestudio/nord-vim'
+" Plugin 'drewtempelmeyer/palenight.vim'
 " Git utils
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
@@ -78,6 +80,7 @@ Plugin 'Shougo/deoplete.nvim'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'mattn/emmet-vim'
+Plugin 'AndrewRadev/tagalong.vim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'tpope/vim-surround'
@@ -86,6 +89,8 @@ Plugin 'tpope/vim-surround'
 Plugin 'posva/vim-vue'
 Plugin 'pangloss/vim-javascript'
 Plugin 'Valloric/MatchTagAlways'
+Plugin 'maxmellon/vim-jsx-pretty'
+Plugin 'HerringtonDarkholme/yats.vim'
 "Rails plugins
 Plugin 'tpope/vim-rails'
 call vundle#end()            " required
@@ -93,8 +98,9 @@ filetype plugin indent on    " required
 
 "APPEARANCE SETTINGS
 set background=dark
-colorscheme palenight
-let g:palenight_terminal_italics=1
+set t_Co=256
+colorscheme nord
+" let g:palenight_terminal_italics=1
 noremap <F7> :highlight Normal guibg=none<CR>
 noremap <F8> :highlight Normal guibg=#292D3E<CR>
 "CUSTOM MAPPINGS
@@ -160,6 +166,7 @@ xnoremap c "xc
 nnoremap <leader>y :let @+=expand("%") . ':' . line(".")<CR>
 " After block yank and paste, move cursor to the end of operated text and don't override register
 vnoremap y y`]
+vnoremap P "_dP`]
 vnoremap p "_dP`]
 nnoremap p p`]
 
@@ -183,7 +190,7 @@ let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_vue_eslint_exe = $PWD .'/node_modules/.bin/eslint'
 let g:deoplete#enable_at_startup = 1
 " autocmd FileType vue syntax sync fromstart
-" autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
+autocmd BufRead,BufNewFile *.ts setlocal filetype=typescript
 
 "deoplete
 
@@ -200,7 +207,13 @@ call deoplete#custom#option({
 inoremap <c-x><c-k> <c-x><c-k>
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+let g:ultisnips_javascript = {
+\ 'keyword-spacing': 'always',
+\ 'semi': 'never',
+\ 'space-before-function-paren': 'always'
+\ }
 
+autocmd FileType javascript UltiSnipsAddFiletypes javascript-jasmine
 " inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 "lightline
@@ -234,7 +247,7 @@ let g:lightline = {
       \   'separator': '',
       \ },
       \ }
-let g:lightline.colorscheme = 'palenight'
+" let g:lightline.colorscheme = 'palenight'
 
 " Or in ~/.vim/vimrc:
 " Run both javascript and vue linters for vue files.
@@ -243,6 +256,7 @@ let g:ale_linters = {
 \   'javascript': ['eslint', 'flow-language-server'],
 \}
 let g:ale_fixers = {
+\   'html': ['prettier'],
 \   'javascript': ['eslint'],
 \}
 
@@ -256,6 +270,7 @@ nnoremap <silent> <leader>a :Buffers<CR>
 nnoremap <silent> <leader>. :FZF -e<CR>
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
 let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
+let g:fzf_layout = { 'down': '40%' }
 
 function! s:build_quickfix_list(lines)
   call setqflist(map(copy(a:lines), '{ "filename": v:val }'))

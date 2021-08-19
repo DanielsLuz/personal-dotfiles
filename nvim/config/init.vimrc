@@ -82,6 +82,7 @@ let g:neomake_javascript_eslint_exe = $PWD .'/node_modules/.bin/eslint'
 let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_vue_eslint_exe = $PWD .'/node_modules/.bin/eslint'
 let g:deoplete#enable_at_startup = 1
+let g:python3_host_prog = '/usr/bin/python3'
 autocmd FileType vue syntax sync fromstart
 autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript
 
