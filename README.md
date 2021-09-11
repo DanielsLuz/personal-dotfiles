@@ -3,6 +3,11 @@
 Clone anywhere.
 
 ## Configuring
+### Util
+```bash
+sudo apt-get install jq silversearcher-ag exuberant-ctags autojump git
+```
+
 ### Git
 - install `diff-so-fancy`
   - `curl https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy -o ~/scripts/diff-so-fancy`
@@ -10,7 +15,7 @@ Clone anywhere.
 - `ln -s $PWD/git/.gitconfig $HOME/.gitconfig`
   - edit "user" section accordingly
 - `ln -s $PWD/git/.gitignore_global $HOME/.gitignore_global`
-  - make sure `git config --global core.excludesfile $HOME/.gitignore_global` is set correctly
+  - make sure `git config --global core.excludesfile $HOME/.gitignore_global` is set correctly ($HOME expanded)
 
 ### Tmux
 ```bash
