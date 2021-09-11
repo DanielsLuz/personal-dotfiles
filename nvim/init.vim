@@ -53,7 +53,7 @@ Plugin 'gmarik/Vundle.vim'
 " Global utils
 Plugin 'radenling/vim-dispatch-neovim'
 Plugin 'tpope/vim-dispatch'
-Plugin 'MarcWeber/vim-addon-mw-utils'
+" Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'tpope/vim-obsession'
 Plugin 'tpope/vim-repeat'
@@ -258,6 +258,7 @@ let g:ale_linters = {
 let g:ale_fixers = {
 \   'html': ['prettier'],
 \   'javascript': ['eslint'],
+\   'javascriptreact': ['eslint'],
 \}
 
 "nerdtree configuration
@@ -332,4 +333,9 @@ nnoremap <silent> <C-C><C-K> :call OpenCSSRuleDocs()<CR>
 function! OpenCSSRuleDocs()
   let CSSDocsURL = 'https://developer.mozilla.org/en-US/docs/Web/CSS'
   silent exec "!x-www-browser " . CSSDocsURL . "/" . expand("<cword>")
+endfunction
+
+nnoremap <silent> <C-c><C-j> :call FormatJSON()<CR>
+function! FormatJSON()
+  silent exec "%!jq '.'"
 endfunction

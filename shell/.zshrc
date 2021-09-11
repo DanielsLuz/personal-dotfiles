@@ -100,23 +100,21 @@ function gsu(){
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias vpn="cd $HOME/programs/forticlientsslvpn"
-alias gw2="ssh -i ~/.ssh/id_rsa_gateway _daluz@nibbler0002.linux.locaweb.com.br"
-alias gw1="ssh -i ~/.ssh/id_rsa_gateway _daluz@nibbler0006.linux.locaweb.com.br"
 alias r="bundle exec rspec"
-alias rr="VCR_MODE=rec r"
 alias ro="bundle exec rspec --only-failures"
 
 export PATH=$HOME/programs:$PATH
+export PATH=$HOME/programs/node-v14.17.5-linux-x64/bin:$PATH
 export PATH=$HOME/scripts:$PATH
 export PATH=$HOME/neovim/bin:$PATH
 export PATH=$HOME/n/bin:$PATH
 export PATH=$HOME/.yarn/bin:$PATH
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 alias nfzf="nvim \$(fzf)"
 
 export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
