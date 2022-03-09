@@ -62,11 +62,16 @@ setopt   HIST_REDUCE_BLANKS HIST_SAVE_NO_DUPS
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git rails bundler autojump docker-compose)
+plugins=(git rails bundler autojump docker-compose tmux)
 
 source $ZSH/oh-my-zsh.sh
+export LD_LIBRARY_PATH=$HOME/openssl/lib
+export LC_ALL="en_US.UTF-8"
+export LDFLAGS="-L /home/danielluz/openssl/lib -Wl,-rpath,/home/danielluz/openssl/lib"
+
 alias gst="git status --short"
 alias clip="xsel --clipboard -i"
+alias merge-pdf="gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dPDFSETTINGS=/prepress -sOutputFile=merged.pdf"
 
 # User configuration
 
@@ -103,6 +108,7 @@ function gsu(){
 alias r="bundle exec rspec"
 alias ro="bundle exec rspec --only-failures"
 
+export PATH=$HOME/openssl/bin:$PATH
 export PATH=$HOME/programs:$PATH
 export PATH=$HOME/programs/node-v14.17.5-linux-x64/bin:$PATH
 export PATH=$HOME/scripts:$PATH

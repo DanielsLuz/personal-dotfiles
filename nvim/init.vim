@@ -28,7 +28,6 @@ set suffixesadd=.js,.vue
 """""""""""""""""""
 set nocompatible
 filetype off
-filetype plugin indent on
 set showmatch
 "set tab to 2 spaces rather than 4
 set tabstop=2
@@ -47,54 +46,61 @@ let g:python3_host_prog='/usr/bin/python3'
 let g:python2_host_prog='/usr/bin/python'
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.fzf
-set rtp+=~/.config/nvim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'gmarik/Vundle.vim'
+" auto-install vim-plug
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  silent execute '!curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.config/nvim/plugged')
+Plug 'gmarik/Vundle.vim'
 " Global utils
-Plugin 'radenling/vim-dispatch-neovim'
-Plugin 'tpope/vim-dispatch'
-" Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'tpope/vim-obsession'
-Plugin 'tpope/vim-repeat'
+Plug 'radenling/vim-dispatch-neovim'
+Plug 'tpope/vim-dispatch'
+" Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'tpope/vim-obsession'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-unimpaired'
 " Linting
-" Plugin 'neomake/neomake'
-Plugin 'dense-analysis/ale'
+" Plug 'neomake/neomake'
+Plug 'dense-analysis/ale'
 " Searching
-Plugin 'mileszs/ack.vim'
+Plug 'mileszs/ack.vim'
 " Some colorschemes
-Plugin 'arcticicestudio/nord-vim'
-" Plugin 'drewtempelmeyer/palenight.vim'
+Plug 'arcticicestudio/nord-vim'
+" Plug 'drewtempelmeyer/palenight.vim'
 " Git utils
-Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
 " Navigation
-Plugin 'scrooloose/nerdtree'
-Plugin 'junegunn/fzf.vim'
-Plugin 'ludovicchabant/vim-gutentags'
+Plug 'scrooloose/nerdtree'
+Plug 'junegunn/fzf.vim'
+" Plug 'ludovicchabant/vim-gutentags'
 " Better buffers
-Plugin 'itchyny/lightline.vim'
-Plugin 'taohexxx/lightline-buffer'
+Plug 'itchyny/lightline.vim'
+Plug 'taohexxx/lightline-buffer'
 " Autocompletion
-Plugin 'Shougo/deoplete.nvim'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'mattn/emmet-vim'
-Plugin 'AndrewRadev/tagalong.vim'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'tpope/vim-surround'
+Plug 'Shougo/deoplete.nvim'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'mattn/emmet-vim'
+Plug 'AndrewRadev/tagalong.vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-surround'
 "Javascript plugins
-" Plugin 'othree/javascript-libraries-syntax.vim'
-Plugin 'posva/vim-vue'
-Plugin 'pangloss/vim-javascript'
-Plugin 'Valloric/MatchTagAlways'
-Plugin 'maxmellon/vim-jsx-pretty'
-Plugin 'HerringtonDarkholme/yats.vim'
+" Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'posva/vim-vue'
+Plug 'pangloss/vim-javascript'
+Plug 'Valloric/MatchTagAlways'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'othree/yajs.vim'
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Rails plugins
-Plugin 'tpope/vim-rails'
-call vundle#end()            " required
-filetype plugin indent on    " required
+Plug 'tpope/vim-rails'
+call plug#end()            " required
 
 "APPEARANCE SETTINGS
 set background=dark
@@ -192,6 +198,9 @@ let g:deoplete#enable_at_startup = 1
 " autocmd FileType vue syntax sync fromstart
 autocmd BufRead,BufNewFile *.ts setlocal filetype=typescript
 
+" coc
+let g:coc_global_extensions = ['coc-tsserver']  " list of CoC extensions needed
+
 "deoplete
 
 " deoplete configuration
@@ -202,6 +211,7 @@ call deoplete#custom#option({
 \ 'sources._': ['buffer', 'tags'],
 \ 'cache_limit_size': 5000000
 \ })
+let g:gutentags_exclude_filetypes = ['gitcommit', 'gitconfig', 'gitrebase', 'gitsendemail', 'git']
 
 " snippet completion
 inoremap <c-x><c-k> <c-x><c-k>
@@ -225,10 +235,7 @@ set laststatus=2
 set showtabline=2  " always show tabline
 let g:lightline = {
       \ 'tabline': {
-      \   'left': [ [ 'bufferinfo' ],
-      \             [ 'separator' ],
-      \             [ 'bufferbefore', 'buffercurrent', 'bufferafter' ], ],
-      \   'right': [ [ 'close' ], ],
+      \   'left': [ [ 'bufferbefore', 'buffercurrent', 'bufferafter' ], ],
       \ },
       \ 'component_expand': {
       \   'buffercurrent': 'lightline#buffer#buffercurrent',
@@ -244,10 +251,10 @@ let g:lightline = {
       \   'bufferinfo': 'lightline#buffer#bufferinfo',
       \ },
       \ 'component': {
-      \   'separator': '',
+      \   'separator': '|',
       \ },
       \ }
-" let g:lightline.colorscheme = 'palenight'
+let g:lightline.colorscheme = 'nord'
 
 " Or in ~/.vim/vimrc:
 " Run both javascript and vue linters for vue files.

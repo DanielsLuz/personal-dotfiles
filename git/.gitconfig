@@ -29,3 +29,5 @@
 	first-run = false
 [rebase]
 	autosquash = true
+[init]
+	defaultBranch = main
