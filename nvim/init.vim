@@ -44,7 +44,7 @@ set splitright
 
 let g:python3_host_prog='/usr/bin/python3'
 let g:python2_host_prog='/usr/bin/python'
-" set the runtime path to include Vundle and initialize
+
 set rtp+=~/.fzf
 " auto-install vim-plug
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
@@ -53,7 +53,6 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.config/nvim/plugged')
-Plug 'gmarik/Vundle.vim'
 " Global utils
 Plug 'radenling/vim-dispatch-neovim'
 Plug 'tpope/vim-dispatch'
@@ -199,7 +198,12 @@ let g:deoplete#enable_at_startup = 1
 autocmd BufRead,BufNewFile *.ts setlocal filetype=typescript
 
 " coc
-let g:coc_global_extensions = ['coc-tsserver']  " list of CoC extensions needed
+let g:coc_global_extensions = ['coc-tsserver', 'coc-json', 'coc-html', 'coc-css']  " list of CoC extensions needed
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
 "deoplete
 
@@ -255,6 +259,18 @@ let g:lightline = {
       \ },
       \ }
 let g:lightline.colorscheme = 'nord'
+" :help filename-modifiers
+let g:lightline_buffer_fname_mod = ':t'
+" hide buffer list
+let g:lightline_buffer_excludes = ['vimfiler']
+" max file name length
+let g:lightline_buffer_maxflen = 30
+" max file extension length
+let g:lightline_buffer_maxfextlen = 3
+" min file name length
+let g:lightline_buffer_minflen = 16
+" min file extension length
+let g:lightline_buffer_minfextlen = 3
 
 " Or in ~/.vim/vimrc:
 " Run both javascript and vue linters for vue files.

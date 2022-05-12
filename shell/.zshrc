@@ -115,6 +115,7 @@ export PATH=$HOME/scripts:$PATH
 export PATH=$HOME/neovim/bin:$PATH
 export PATH=$HOME/n/bin:$PATH
 export PATH=$HOME/.yarn/bin:$PATH
+export PATH=/snap/bin:$PATH
 
 alias nfzf="nvim \$(fzf)"
 
