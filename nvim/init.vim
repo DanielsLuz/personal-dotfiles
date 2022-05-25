@@ -80,7 +80,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'taohexxx/lightline-buffer'
 " Autocompletion
-Plug 'Shougo/deoplete.nvim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'mattn/emmet-vim'
@@ -193,7 +192,6 @@ nnoremap <CR> :noh<CR>
 let g:neomake_javascript_eslint_exe = $PWD .'/node_modules/.bin/eslint'
 let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_vue_eslint_exe = $PWD .'/node_modules/.bin/eslint'
-let g:deoplete#enable_at_startup = 1
 " autocmd FileType vue syntax sync fromstart
 autocmd BufRead,BufNewFile *.ts setlocal filetype=typescript
 
@@ -205,16 +203,6 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-"deoplete
-
-" deoplete configuration
-call deoplete#custom#option({
-\ 'enable_smart_case': 1,
-\ 'enable_refresh_always': 0,
-\ 'auto_complete_delay': 200,
-\ 'sources._': ['buffer', 'tags'],
-\ 'cache_limit_size': 5000000
-\ })
 let g:gutentags_exclude_filetypes = ['gitcommit', 'gitconfig', 'gitrebase', 'gitsendemail', 'git']
 
 " snippet completion
