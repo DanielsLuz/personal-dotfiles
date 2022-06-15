@@ -36,6 +36,7 @@ set expandtab
 set nowrap
 set scrolloff=10
 set number
+set signcolumn=number
 set notimeout
 set ttimeout
 set ttimeoutlen=10
@@ -131,6 +132,15 @@ nmap <BS> <C-^>
 
 " Remaping K for search under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+nnoremap <leader>d :call ShowDocumentation()<CR>
+
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
 
 " QuickFix navigation
 nnoremap ]q :cnext<CR>
@@ -149,6 +159,7 @@ nnoremap <F3> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 
 "map \s to rename variable
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
+nmap <leader>rn <Plug>(coc-rename)
 
 "Set pastetoggle, keeps indentation
 set pastetoggle=<F2>

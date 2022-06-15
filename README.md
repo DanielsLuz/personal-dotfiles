@@ -28,12 +28,9 @@ ln -s $PWD/shell/.tmux.conf $HOME/.tmux.conf
 
 ### Neovim
 - install [Neovim](https://neovim.io/)
-- install [Vundle](https://github.com/VundleVim/Vundle.vim.git)
-```bash
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.config/nvim/bundle/Vundle.vim
-ln -s $PWD/nvim $HOME/.config/nvim
-```
-- open `nvim` and run `:BundleInstall`, then `:UpdateRemotePlugins`
+- `vim-plug` should be automatically installed when opening `nvim`. See [Here](https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation)``
+- open `nvim` and run `:PlugInstall`
+- install Coc language servers: `:CocInstall coc-json coc-tsserver coc-html coc-css`
 
 ### FZF
 ```bash
@@ -47,5 +44,3 @@ ln -s $PWD/shell/.zshrc $HOME/.zshrc
 ln -s $PWD/shell/.oh-my-zsh $HOME/.oh-my-zsh
 ln -s $PWD/shell/.agignore $HOME/.agignore
 ```
-- install Terminator terminal
-  - `ln -s $PWD/shell/terminator $HOME/.config/terminator`
