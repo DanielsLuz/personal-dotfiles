@@ -5,7 +5,7 @@ Clone anywhere.
 ## Configuring
 ### Util
 ```bash
-sudo apt-get install jq silversearcher-ag exuberant-ctags autojump git
+sudo apt-get install zsh jq silversearcher-ag exuberant-ctags autojump git
 ```
 
 ### Git
@@ -28,6 +28,7 @@ ln -s $PWD/shell/.tmux.conf $HOME/.tmux.conf
 
 ### Neovim
 - install [Neovim](https://neovim.io/)
+- `ln -s $PWD/nvim $HOME/.config/nvim`
 - `vim-plug` should be automatically installed when opening `nvim`. See [Here](https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation)``
 - open `nvim` and run `:PlugInstall`
 - install Coc language servers: `:CocInstall coc-json coc-tsserver coc-html coc-css`
@@ -41,6 +42,7 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ### Shell
 ```
 ln -s $PWD/shell/.zshrc $HOME/.zshrc
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ln -s $PWD/shell/.oh-my-zsh $HOME/.oh-my-zsh
 ln -s $PWD/shell/.agignore $HOME/.agignore
 ```

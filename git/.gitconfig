@@ -3,7 +3,7 @@
 	excludesfile = /home/danielluz/.gitignore_global
   editor = nvim
 [user]
-	email = danielluz1995@gmail.com
+	email = luzdaniel989@gmail.com
 	name = Daniel Luz
 [pull]
 	rebase = true

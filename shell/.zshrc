@@ -65,6 +65,7 @@ setopt   HIST_REDUCE_BLANKS HIST_SAVE_NO_DUPS
 plugins=(git rails bundler autojump docker-compose tmux)
 
 source $ZSH/oh-my-zsh.sh
+source /usr/share/autojump/autojump.sh
 export LD_LIBRARY_PATH=$HOME/openssl/lib
 export LC_ALL="en_US.UTF-8"
 export LDFLAGS="-L /home/danielluz/openssl/lib -Wl,-rpath,/home/danielluz/openssl/lib"
