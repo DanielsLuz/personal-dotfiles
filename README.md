@@ -8,6 +8,17 @@ Clone anywhere.
 sudo apt-get install zsh jq silversearcher-ag exuberant-ctags autojump git
 ```
 
+### Shell
+- Install [OhMyZsh and Zsh](https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH)
+```
+ln -s $PWD/shell/.zshrc $HOME/.zshrc
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+ln -s $PWD/shell/.oh-my-zsh $HOME/.oh-my-zsh
+ln -s $PWD/shell/.agignore $HOME/.agignore
+```
+
+- Install [Gnome terminal nord theme](https://github.com/arcticicestudio/nord-gnome-terminal#installation)
+
 ### Git
 - install `diff-so-fancy`
   - `curl https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy -o ~/scripts/diff-so-fancy`
@@ -27,7 +38,7 @@ ln -s $PWD/shell/.tmux.conf $HOME/.tmux.conf
 ```
 
 ### Neovim
-- install [Neovim](https://neovim.io/)
+- install [Neovim](https://neovim.io/) (appImage is fine)
 - `ln -s $PWD/nvim $HOME/.config/nvim`
 - `vim-plug` should be automatically installed when opening `nvim`. See [Here](https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation)``
 - open `nvim` and run `:PlugInstall`
@@ -39,10 +50,6 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
 ```
 
-### Shell
-```
-ln -s $PWD/shell/.zshrc $HOME/.zshrc
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-ln -s $PWD/shell/.oh-my-zsh $HOME/.oh-my-zsh
-ln -s $PWD/shell/.agignore $HOME/.agignore
-```
+### Development
+- Install [N](https://github.com/tj/n)
+- Install `docker` and `docker-compose` (Follow steps [here](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-20-04))
