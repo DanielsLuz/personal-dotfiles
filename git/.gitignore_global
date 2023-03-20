@@ -2,4 +2,4 @@ Session.vim
 *.local.sh
 load_wordpress_info.rb
 .env.local
-tags*
+.tags*

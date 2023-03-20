@@ -164,8 +164,6 @@ nmap <leader>rn <Plug>(coc-rename)
 
 "Set pastetoggle, keeps indentation
 set pastetoggle=<F2>
-nmap <Leader>m :NERDTreeToggle<CR>
-nmap <Leader>n :NERDTreeFind<CR>
 noremap <F9> :cclose<cr>
 noremap <F10> :copen 40<cr>
 
@@ -287,6 +285,8 @@ let g:ale_fixers = {
 "nerdtree configuration
 "Toggle NERDTree
 let g:NERDTreeWinSize=30
+nmap <Leader>m :NERDTreeToggle<CR>
+nmap <Leader>n :NERDTreeFind<CR>
 
 "fzf configuration
 nnoremap <silent> <leader><space> :Files<CR>

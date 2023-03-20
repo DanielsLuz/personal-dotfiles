@@ -64,6 +64,9 @@ setopt   HIST_REDUCE_BLANKS HIST_SAVE_NO_DUPS
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git rails bundler autojump docker-compose tmux)
 
+bindkey "^P" up-line-or-search
+bindkey "^N" down-line-or-search
+
 source $ZSH/oh-my-zsh.sh
 source /usr/share/autojump/autojump.sh
 export LD_LIBRARY_PATH=$HOME/openssl/lib
