@@ -78,6 +78,43 @@ alias clip="xsel --clipboard -i"
 alias merge-pdf="gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dPDFSETTINGS=/prepress -sOutputFile=merged.pdf"
 
 # User configuration
+TODO_FILE=.todo
+function showTodoFile() {
+  echo "Current TODO list:"
+  cat -n $TODO_FILE
+}
+
+function chpwd() {
+  if [[ -s "$TODO_FILE" ]]; then
+    showTodoFile
+  fi
+}
+
+# add todo <task>
+function todo() {
+  if [ $# -eq 0 ]; then
+    showTodoFile
+    return 0
+  fi
+
+  readonly task=${1:?"Specify a task"}
+
+  echo "$task">>$TODO_FILE
+
+  showTodoFile
+}
+
+# complete todo <task number>
+function todone() {
+  readonly taskNumber=${1:?"Specify a task number"}
+
+  echo "DONE"
+  sed "${taskNumber}q;d" $TODO_FILE
+  sed -i "${taskNumber}d" $TODO_FILE
+
+  showTodoFile
+}
+alias don=todone
 
 # export MANPATH="/usr/local/man:$MANPATH"
 

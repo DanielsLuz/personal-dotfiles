@@ -3,3 +3,4 @@ Session.vim
 load_wordpress_info.rb
 .env.local
 .tags*
+.todo
