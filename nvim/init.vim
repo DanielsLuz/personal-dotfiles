@@ -213,6 +213,9 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
+"alternates between <path>/<file>.js and <path>/__tests__/<file>.test.js
+nnoremap <expr> <leader>gt match(expand('%:t'),'\.test') == -1 ? ':e ' . expand("%:h") . '/__tests__/' . expand("%:t:r") . '.test.js<CR>' : ':e ' . expand("%:h:h") . '/' . expand("%:t:r:r") . '.js<CR>'
+
 let g:gutentags_exclude_filetypes = ['gitcommit', 'gitconfig', 'gitrebase', 'gitsendemail', 'git']
 
 " snippet completion
