@@ -80,8 +80,10 @@ alias merge-pdf="gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dPDFSETTINGS=/prepre
 # User configuration
 TODO_FILE=.todo
 function showTodoFile() {
-  echo "Current TODO list:"
-  cat -n $TODO_FILE
+  if [[ -s "$TODO_FILE" ]]; then
+    echo "Current TODO list:"
+    cat -n $TODO_FILE 2>/dev/null
+  fi
 }
 
 function chpwd() {
