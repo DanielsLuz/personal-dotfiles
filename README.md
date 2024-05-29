@@ -27,6 +27,9 @@ ln -s $PWD/shell/.agignore $HOME/.agignore
   - edit "user" section accordingly
 - `ln -s $PWD/git/.gitignore_global $HOME/.gitignore_global`
   - make sure `git config --global core.excludesfile $HOME/.gitignore_global` is set correctly ($HOME expanded)
+- move Upgrade Discord script
+  - `cp ./scripts/upgrade-discord ~/scripts/upgrade-discord`
+  - `sudo chmod +x ~/scripts/upgrade-discord`
 
 ### Tmux
 ```bash

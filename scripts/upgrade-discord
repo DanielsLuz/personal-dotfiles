@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Check if the correct number of arguments is provided
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 <path_to_zip_file>"
+    exit 1
+fi
+
+# Assign the argument to a variable
+zip_file="$1"
+
+# Unzip the file
+tar xvzf "$zip_file" || { echo "Error: Failed to extract the file."; exit 1; }
+
+# Remove the folder /opt/Discord.bkp if it exists
+if [ -d "/opt/Discord.bkp" ]; then
+    sudo rm -rf "/opt/Discord.bkp" || { echo "Error: Failed to remove /opt/Discord.bkp."; exit 1; }
+fi
+
+# Move /opt/Discord to /opt/Discord.bkp if it exists
+if [ -d "/opt/Discord" ]; then
+    sudo mv "/opt/Discord" "/opt/Discord.bkp" || { echo "Error: Failed to move /opt/Discord to /opt/Discord.bkp."; exit 1; }
+fi
+
+# Move the unzipped file to /opt/Discord
+sudo mv -f "Discord" "/opt/Discord" || { echo "Error: Failed to move the unzipped folder to /opt/Discord."; exit 1; }
+
+echo "Installation completed successfully."

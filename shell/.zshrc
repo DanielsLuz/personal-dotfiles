@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:/usr/.local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
   export ZSH="$HOME/.oh-my-zsh"
@@ -133,6 +133,9 @@ alias don=todone
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
+function pdfmerge() {
+  gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dPDFSETTINGS=/prepress -sOutputFile=$@ ;
+}
 # ssh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
 
