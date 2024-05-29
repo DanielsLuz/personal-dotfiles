@@ -7,6 +7,10 @@ Clone anywhere.
 ```bash
 sudo apt-get install zsh jq silversearcher-ag exuberant-ctags autojump git
 ```
+Other programs
+- Mongo DB Tools (Mongo Compass, `mongodump`, `mongorestore`)
+- Postman
+- DBeaver
 
 ### Shell
 - Install [OhMyZsh and Zsh](https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH)
