@@ -70,7 +70,7 @@ bindkey "^N" down-line-or-search
 source $ZSH/oh-my-zsh.sh
 source /usr/share/autojump/autojump.sh
 export LD_LIBRARY_PATH=$HOME/openssl/lib
-export LC_ALL="en_US.UTF-8"
+export LC_ALL="en_GB.UTF-8"
 export LDFLAGS="-L /home/danielluz/openssl/lib -Wl,-rpath,/home/danielluz/openssl/lib"
 
 alias gst="git status --short"
@@ -161,6 +161,7 @@ export PATH=$HOME/scripts:$PATH
 export PATH=$HOME/neovim/bin:$PATH
 export PATH=$HOME/n/bin:$PATH
 export PATH=$HOME/.yarn/bin:$PATH
+export PATH=/opt/nvim/:$PATH
 export PATH=/snap/bin:$PATH
 
 alias nfzf="nvim \$(fzf)"

@@ -5,7 +5,7 @@ Clone anywhere.
 ## Configuring
 ### Util
 ```bash
-sudo apt-get install zsh jq silversearcher-ag exuberant-ctags autojump git
+sudo apt-get install zsh jq silversearcher-ag exuberant-ctags autojump git curl
 ```
 Other programs
 - Mongo DB Tools (Mongo Compass, `mongodump`, `mongorestore`)
@@ -46,7 +46,7 @@ ln -s $PWD/shell/.tmux.conf $HOME/.tmux.conf
 ```
 
 ### Neovim
-- install [Neovim](https://neovim.io/) (appImage is fine)
+- install [Neovim](https://github.com/neovim/neovim/blob/master/INSTALL.md#appimage-universal-linux-package) (appImage is fine)
 - `ln -s $PWD/nvim $HOME/.config/nvim`
 - `vim-plug` should be automatically installed when opening `nvim`. See [Here](https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation)``
 - open `nvim` and run `:PlugInstall`
