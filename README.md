@@ -11,6 +11,7 @@ Other programs
 - Mongo DB Tools (Mongo Compass, `mongodump`, `mongorestore`)
 - Postman
 - DBeaver
+- Cloudflared
 
 ### Shell
 - Install [OhMyZsh and Zsh](https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH)
