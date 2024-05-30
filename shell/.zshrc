@@ -62,7 +62,7 @@ setopt   HIST_REDUCE_BLANKS HIST_SAVE_NO_DUPS
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git rails bundler autojump docker-compose tmux)
+plugins=(git rails bundler autojump docker-compose tmux diff-so-fancy)
 
 bindkey "^P" up-line-or-search
 bindkey "^N" down-line-or-search

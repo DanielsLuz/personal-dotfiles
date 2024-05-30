@@ -62,6 +62,7 @@ Plug 'tomtom/tlib_vim'
 Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
+Plug 'roxma/vim-tmux-clipboard'
 " Linting
 " Plug 'neomake/neomake'
 Plug 'dense-analysis/ale'

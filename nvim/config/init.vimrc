@@ -46,6 +46,7 @@ Plugin 'radenling/vim-dispatch-neovim'
 Plugin 'tpope/vim-dispatch'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
+Plugin 'roxma/vim-tmux-clipboard'
 " Linting
 Plugin 'neomake/neomake'
 " Searching

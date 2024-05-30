@@ -26,8 +26,7 @@ ln -s $PWD/shell/.agignore $HOME/.agignore
 
 ### Git
 - install `diff-so-fancy`
-  - `curl https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy -o ~/scripts/diff-so-fancy`
-  - `sudo chmod +x ~/scripts/diff-so-fancy`
+  - `git clone https://github.com/so-fancy/diff-so-fancy`
 - `ln -s $PWD/git/.gitconfig $HOME/.gitconfig`
   - edit "user" section accordingly
 - `ln -s $PWD/git/.gitignore_global $HOME/.gitignore_global`
