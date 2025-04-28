@@ -62,16 +62,22 @@ setopt   HIST_REDUCE_BLANKS HIST_SAVE_NO_DUPS
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git rails bundler autojump docker-compose tmux diff-so-fancy)
+plugins=(git asdf rails bundler autojump docker-compose tmux)
 
 bindkey "^P" up-line-or-search
 bindkey "^N" down-line-or-search
 
 source $ZSH/oh-my-zsh.sh
-source /usr/share/autojump/autojump.sh
-export LD_LIBRARY_PATH=$HOME/openssl/lib
-export LC_ALL="en_GB.UTF-8"
-export LDFLAGS="-L /home/danielluz/openssl/lib -Wl,-rpath,/home/danielluz/openssl/lib"
+# source /usr/share/autojump/autojump.sh
+source /Users/danielluz/google-cloud-sdk/completion.zsh.inc
+source /Users/danielluz/google-cloud-sdk/path.zsh.inc
+# export LD_LIBRARY_PATH=$HOME/openssl/lib
+# export LC_ALL="en_GB.UTF-8"
+# export LDFLAGS="-L /home/danielluz/openssl/lib -Wl,-rpath,/home/danielluz/openssl/lib"
+# go
+export GOPATH=$(asdf where golang)/packages
+export GOROOT=$(asdf where golang)/go
+export PATH="${PATH}:$(go env GOPATH)/bin"
 
 alias gst="git status --short"
 alias clip="xsel --clipboard -i"
@@ -121,7 +127,7 @@ alias don=todone
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+# export LANG=pt_BR.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -161,6 +167,7 @@ export PATH=$HOME/scripts:$PATH
 export PATH=$HOME/neovim/bin:$PATH
 export PATH=$HOME/n/bin:$PATH
 export PATH=$HOME/.yarn/bin:$PATH
+export PATH=$HOME/.truta/bin:$PATH
 export PATH=/opt/nvim/:$PATH
 export PATH=/snap/bin:$PATH
 
@@ -172,3 +179,5 @@ export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PR
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+PATH=$PATH:/Users/danielluz/.truepay/gcp-common-scripts

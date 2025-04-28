@@ -43,8 +43,8 @@ set ttimeoutlen=10
 set splitbelow
 set splitright
 
-let g:python3_host_prog='/usr/bin/python3'
-let g:python2_host_prog='/usr/bin/python'
+let g:python3_host_prog='/usr/local/bin/python3'
+let g:python2_host_prog='/usr/local/bin/python3'
 
 set rtp+=~/.fzf
 " auto-install vim-plug
@@ -82,26 +82,31 @@ Plug 'junegunn/fzf.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'taohexxx/lightline-buffer'
 " Autocompletion
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'mattn/emmet-vim'
+Plug 'github/copilot.vim'
 " Plug 'AndrewRadev/tagalong.vim'
 " Plug 'windwp/nvim-ts-autotag'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-surround'
 "Javascript plugins
-" Plug 'othree/javascript-libraries-syntax.vim'
-Plug 'posva/vim-vue'
 Plug 'pangloss/vim-javascript'
 Plug 'alvan/vim-closetag'
 " Plug 'Valloric/MatchTagAlways'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'othree/yajs.vim'
 Plug 'HerringtonDarkholme/yats.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'v0.0.82'}
-"Rails plugins
-Plug 'tpope/vim-rails'
+"Go
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
+Plug 'neovim/nvim-lspconfig'
+Plug 'ray-x/go.nvim'
+Plug 'ray-x/navigator.lua'
+Plug 'ray-x/guihua.lua'
+Plug 'hashivim/vim-terraform'
 call plug#end()            " required
 
 "APPEARANCE SETTINGS
@@ -135,15 +140,6 @@ nmap <BS> <C-^>
 
 " Remaping K for search under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-nnoremap <leader>d :call ShowDocumentation()<CR>
-
-function! ShowDocumentation()
-  if CocAction('hasProvider', 'hover')
-    call CocActionAsync('doHover')
-  else
-    call feedkeys('K', 'in')
-  endif
-endfunction
 
 " QuickFix navigation
 nnoremap ]q :cnext<CR>
@@ -162,7 +158,6 @@ nnoremap <F3> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 
 "map \s to rename variable
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
-nmap <leader>rn <Plug>(coc-rename)
 
 "Set pastetoggle, keeps indentation
 set pastetoggle=<F2>
@@ -201,36 +196,30 @@ nnoremap <silent> <F5> :source $MYVIMRC<CR>
 nnoremap <CR> :noh<CR>
 
 "PLUGIN SETTINGS
-let g:neomake_javascript_eslint_exe = $PWD .'/node_modules/.bin/eslint'
-let g:neomake_javascript_enabled_makers = ['eslint']
-let g:neomake_vue_eslint_exe = $PWD .'/node_modules/.bin/eslint'
+" let g:neomake_javascript_eslint_exe = $PWD .'/node_modules/.bin/eslint'
+" let g:neomake_javascript_enabled_makers = ['eslint']
+" let g:neomake_vue_eslint_exe = $PWD .'/node_modules/.bin/eslint'
 " autocmd FileType vue syntax sync fromstart
 autocmd BufRead,BufNewFile *.ts setlocal filetype=typescript
 
-" coc
-let g:coc_global_extensions = ['coc-tsserver', 'coc-json', 'coc-html', 'coc-css']  " list of CoC extensions needed
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
+"Go maps
 "alternates between <path>/<file>.js and <path>/__tests__/<file>.test.js
-nnoremap <expr> <leader>gt match(expand('%:t'),'\.test') == -1 ? ':e ' . expand("%:h") . '/__tests__/' . expand("%:t:r") . '.test.js<CR>' : ':e ' . expand("%:h:h") . '/' . expand("%:t:r:r") . '.js<CR>'
+nnoremap <leader>gt :GoAlt!<CR>
+nnoremap <leader>rf :GoTestFile<CR>
 
 let g:gutentags_exclude_filetypes = ['gitcommit', 'gitconfig', 'gitrebase', 'gitsendemail', 'git']
 
 " snippet completion
 inoremap <c-x><c-k> <c-x><c-k>
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-let g:ultisnips_javascript = {
-\ 'keyword-spacing': 'always',
-\ 'semi': 'never',
-\ 'space-before-function-paren': 'always'
-\ }
+" let g:UltiSnipsJumpForwardTrigger="<c-j>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+" let g:ultisnips_javascript = {
+" \ 'keyword-spacing': 'always',
+" \ 'semi': 'never',
+" \ 'space-before-function-paren': 'always'
+" \ }
 
-autocmd FileType javascript UltiSnipsAddFiletypes javascript-jasmine
+" autocmd FileType javascript UltiSnipsAddFiletypes javascript-jasmine
 " inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 "lightline
@@ -280,11 +269,13 @@ let g:lightline_buffer_minfextlen = 3
 let b:ale_linter_aliases = ['javascript', 'vue']
 let g:ale_linters = {
 \   'javascript': ['eslint', 'flow-language-server'],
+"\   'go': ['golangci-lint'],
 \}
 let g:ale_fixers = {
 \   'html': ['prettier'],
 \   'javascript': ['eslint'],
 \   'javascriptreact': ['eslint'],
+"\   'go': ['golangci_lint'],
 \}
 
 "nerdtree configuration
