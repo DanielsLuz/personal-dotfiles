@@ -26,8 +26,8 @@ set path=.,src
 set suffixesadd=.js,.vue
 
 """""""""""""""""""
-set nocompatible
-filetype off
+" set nocompatible
+" filetype off
 set showmatch
 "set tab to 2 spaces rather than 4
 set tabstop=2
@@ -59,13 +59,13 @@ Plug 'radenling/vim-dispatch-neovim'
 Plug 'tpope/vim-dispatch'
 " Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
-Plug 'tpope/vim-obsession'
+" Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
-Plug 'roxma/vim-tmux-clipboard'
+" Plug 'roxma/vim-tmux-clipboard'
 " Linting
 " Plug 'neomake/neomake'
-Plug 'dense-analysis/ale'
+" Plug 'dense-analysis/ale'
 " Searching
 Plug 'mileszs/ack.vim'
 " Some colorschemes
@@ -111,7 +111,7 @@ call plug#end()            " required
 
 "APPEARANCE SETTINGS
 set background=dark
-set t_Co=256
+" set t_Co=256
 colorscheme nord
 " let g:palenight_terminal_italics=1
 noremap <F7> :highlight Normal guibg=none<CR>
@@ -266,17 +266,17 @@ let g:lightline_buffer_minfextlen = 3
 
 " Or in ~/.vim/vimrc:
 " Run both javascript and vue linters for vue files.
-let b:ale_linter_aliases = ['javascript', 'vue']
-let g:ale_linters = {
-\   'javascript': ['eslint', 'flow-language-server'],
-"\   'go': ['golangci-lint'],
-\}
-let g:ale_fixers = {
-\   'html': ['prettier'],
-\   'javascript': ['eslint'],
-\   'javascriptreact': ['eslint'],
-"\   'go': ['golangci_lint'],
-\}
+" let b:ale_linter_aliases = ['javascript', 'vue']
+" let g:ale_linters = {
+" \   'javascript': ['eslint', 'flow-language-server'],
+" "\   'go': ['golangci-lint'],
+" \}
+" let g:ale_fixers = {
+" \   'html': ['prettier'],
+" \   'javascript': ['eslint'],
+" \   'javascriptreact': ['eslint'],
+" "\   'go': ['golangci_lint'],
+" \}
 
 "nerdtree configuration
 "Toggle NERDTree
@@ -318,14 +318,13 @@ augroup vue_ft
 augroup END
 
 "Neovim configs
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 0
+" let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 0
 set clipboard+=unnamedplus
-let g:syntastic_ignore_files = ['\.java$']
 
-if (has("nvim"))
-  "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-endif
+" if (has("nvim"))
+"   "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+"   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+" endif
 
 "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
 "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
