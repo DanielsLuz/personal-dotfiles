@@ -62,26 +62,24 @@ setopt   HIST_REDUCE_BLANKS HIST_SAVE_NO_DUPS
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git asdf rails bundler autojump docker-compose tmux)
+plugins=(git asdf rails bundler autojump docker-compose tmux gcloud)
 
 bindkey "^P" up-line-or-search
 bindkey "^N" down-line-or-search
 
 source $ZSH/oh-my-zsh.sh
 # source /usr/share/autojump/autojump.sh
-source /Users/danielluz/google-cloud-sdk/completion.zsh.inc
-source /Users/danielluz/google-cloud-sdk/path.zsh.inc
+# source /Users/danielluz/google-cloud-sdk/completion.zsh.inc
+# source /Users/danielluz/google-cloud-sdk/path.zsh.inc
 # export LD_LIBRARY_PATH=$HOME/openssl/lib
 # export LC_ALL="en_GB.UTF-8"
 # export LDFLAGS="-L /home/danielluz/openssl/lib -Wl,-rpath,/home/danielluz/openssl/lib"
 # go
-export GOPATH=$(asdf where golang)/packages
-export GOROOT=$(asdf where golang)/go
-export PATH="${PATH}:$(go env GOPATH)/bin"
 
 alias gst="git status --short"
-alias clip="xsel --clipboard -i"
-alias merge-pdf="gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dPDFSETTINGS=/prepress -sOutputFile=merged.pdf"
+alias clip="wl-copy"
+alias proxy-start="cloud-sql-proxy --config-file $HOME/programs/cloud-sql-proxy-config.yaml"
+alias gcs="git diff --cached --name-only --diff-filter=ACM | grep '\.go$' | xargs -I {} gci write --skip-generated -s standard -s default -s \"prefix(github.com/truepay)\" {}"
 
 # User configuration
 TODO_FILE=.todo
@@ -170,6 +168,11 @@ export PATH=$HOME/.yarn/bin:$PATH
 export PATH=$HOME/.truta/bin:$PATH
 export PATH=/opt/nvim/:$PATH
 export PATH=/snap/bin:$PATH
+export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
+export PATH=$HOME/.truepay/gcp-common-scripts:$PATH
+export GOPATH=$(asdf where golang)/packages
+export GOROOT=$(asdf where golang)/go
+export PATH="${PATH}:$(go env GOPATH)/bin"
 
 alias nfzf="nvim \$(fzf)"
 
@@ -180,4 +183,4 @@ export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PR
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-PATH=$PATH:/Users/danielluz/.truepay/gcp-common-scripts
+export PATH="$HOME/.local/bin:$PATH"

@@ -139,7 +139,7 @@ inoremap <F12> <C-o>:syntax sync fromstart<CR>
 nmap <BS> <C-^>
 
 " Remaping K for search under cursor
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+nnoremap <leader>j :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " QuickFix navigation
 nnoremap ]q :cnext<CR>
@@ -160,7 +160,6 @@ nnoremap <F3> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
 
 "Set pastetoggle, keeps indentation
-set pastetoggle=<F2>
 noremap <F9> :cclose<cr>
 noremap <F10> :copen 40<cr>
 
